@@ -34,11 +34,7 @@ class _SceneryState extends State<Scenery> {
           //todo(you) - Can you find a way to toggle this text area background color according to the theme?
           Positioned(
             bottom: 0,
-            child: Container(
-              height: _textAreaHeight,
-              width: constraints.maxWidth,
-              child: const SomeText(),
-            ),
+            child: theme(myTheme.themeType, constraints),
           ),
           Positioned(
             bottom: 0,
@@ -71,10 +67,10 @@ class _SceneryState extends State<Scenery> {
                     Expanded(
                       child: RadioListTile<ThemeType>(
                         contentPadding: EdgeInsets.symmetric(horizontal: 4),
-                        title: const Text('Other'),
+                        title: const Text('Joy'),
                         groupValue: myTheme.themeType,
-                        value: ThemeType.Other,
-                        onChanged: (ThemeType? mode) => myTheme.setThemeType(ThemeType.Other),
+                        value: ThemeType.Joy,
+                        onChanged: (ThemeType? mode) => myTheme.setThemeType(ThemeType.Joy),
                       ),
                     ),
                   ],
@@ -85,6 +81,62 @@ class _SceneryState extends State<Scenery> {
         ],
       ),
     );
+  }
+
+  theme(ThemeType myThemeType, BoxConstraints constraints) {
+    switch (myThemeType) {
+      case ThemeType.Light:
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.deepPurple,
+                Colors.deepPurple[700]!,
+              ],
+            ),
+          ),
+          // color: Colors.pink[50],
+          height: _textAreaHeight,
+          width: constraints.maxWidth,
+          child: const SomeText(),
+        );
+      case ThemeType.Dark:
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.blueGrey[800]!,
+                Colors.blueGrey[700]!,
+              ],
+            ),
+          ),
+          // color: Colors.pink[50],
+          height: _textAreaHeight,
+          width: constraints.maxWidth,
+          child: const SomeText(),
+        );
+      case ThemeType.Joy:
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.blue[700]!,
+                Colors.blue[300]!,
+              ],
+            ),
+          ),
+          // color: Colors.pink[50],
+          height: _textAreaHeight,
+          width: constraints.maxWidth,
+          child: const SomeText(),
+        );
+    }
   }
 }
 
